@@ -155,7 +155,7 @@ section svg {
 .card {
     margin: 10px;
     padding: 10px 20px 10px 20px;
-    /*box-shadow: 0 0 8px #D0D0D0;*/
+    box-shadow: 0 0 2px #D0D0D0;
 }
 
 .card-header {
@@ -204,7 +204,7 @@ input[type=submit]:hover {
 }
 
 /* TEXTS */
-.text-danger{
+.text-error{
     color: #a04848;
 }
 

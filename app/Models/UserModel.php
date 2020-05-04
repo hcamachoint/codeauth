@@ -5,22 +5,19 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table = 'users';
-    protected $allowedFields = ['uuid', 'firstname', 'lastname', 'email', 'password'];
+    protected $allowedFields = ['uuid', 'firstname', 'lastname', 'username', 'email', 'password'];
+    protected $primaryKey = 'id';
 
-    public function getProfile($id)
+    public function login($username, $password)
     {
-      return $this->where(['uuid' => $id])->first();
-    }
-
-    public function login($email, $password)
-    {
-      $query = $this->where("email", $email)->first();
+      $session = \Config\Services::session();
+      $query = $this->where("username", $username)->first();
       if ($query) {
         if (password_verify($password, $query['password'])) {
-          $session = \Config\Services::session();
           $userdata = [
                   'firstname'  => $query['firstname'],
                   'lastname' => $query['lastname'],
+                  'username'  => $query['username'],
                   'email' => $query['email'],
                   'logged_in' => TRUE
           ];
@@ -28,6 +25,7 @@ class UserModel extends Model
           return true;
         }
       }
+      $session->setFlashdata('error', 'Wrong username or password!');
       return false;
     }
 }

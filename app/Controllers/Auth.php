@@ -19,7 +19,7 @@ class Auth extends BaseController
 			return view('auth/login');
 		}else {
 			$model = new UserModel();
-			if ($model->login($this->request->getVar('email'), $this->request->getVar('password'))) {
+			if ($model->login($this->request->getVar('username'), $this->request->getVar('password'))) {
 				return redirect()->to(base_url().'/home');
 			}else {
 				return view('auth/login');
@@ -41,11 +41,12 @@ class Auth extends BaseController
 		}else {
 			$model = new UserModel();
 	    if (! $this->validate([
-	        'firstname' => 'required|min_length[3]|max_length[30]',
-	        'lastname' => 'required|min_length[3]|max_length[30]',
-					'email' => 'required|valid_email|is_unique[users.email]|min_length[5]|max_length[100]',
-					'password' => 'required|min_length[6]|max_length[100]',
-					'password_confirm' => 'required|min_length[6]|max_length[100]|matches[password]'
+	        'firstname' => ['label' => 'Firstname', 'rules' => 'required|min_length[3]|max_length[30]'],
+	        'lastname' => ['label' => 'Lastname', 'rules' => 'required|min_length[3]|max_length[30]'],
+					'username' => ['label' => 'Username', 'rules' => 'required|is_unique[users.username]|min_length[3]|max_length[50]|alpha_numeric_space'],
+					'email' => ['label' => 'Email', 'rules' => 'required|valid_email|is_unique[users.email]|min_length[5]|max_length[50]'],
+					'password' => ['label' => 'Password', 'rules' => 'required|min_length[6]|max_length[100]'],
+					'password_confirm' => ['label' => 'Password Confirm', 'rules' => 'required|min_length[6]|max_length[100]|matches[password]']
 	    ]))
 	    {
 					return view('auth/register');
@@ -55,12 +56,13 @@ class Auth extends BaseController
 	        $model->save([
 	            'firstname' => $this->request->getVar('firstname'),
 	            'lastname'  => $this->request->getVar('lastname'),
+							'username'  => $this->request->getVar('username'),
 	            'email'  => $this->request->getVar('email'),
 							'password'  => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
 							'uuid' => uuid(),
 							'status' => 1
 	        ]);
-					return redirect()->to(base_url().'/auth/login');
+					return redirect()->to(base_url().'/auth/login')->with('success', 'Account created!');
 	    }
 		}
 	}
