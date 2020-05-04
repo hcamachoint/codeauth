@@ -22,10 +22,10 @@
             <form method="post">
                 <?= csrf_field() ?>
                 <div class="form-group">
-                    <input type="text" name="username" maxlength="30" placeholder="Username" required>
+                    <input type="text" name="username" minlength="3" maxlength="30" placeholder="Username" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" maxlength="100" placeholder="Password" required>
+                    <input type="password" name="password" minlength="6" maxlength="100" placeholder="Password" required>
                 </div>
                 <div class="form-group">
                     <input type="submit" name="send" value="Send">
