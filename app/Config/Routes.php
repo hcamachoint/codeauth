@@ -34,8 +34,8 @@ $routes->get('/', 'Home::index', ['filter' => 'guest-user']);
 $routes->get('/home', 'Home::home', ['filter' => 'auth-user']);
 $routes->group('auth', ['filter' => 'guest-user'], function($routes)
 {
-    $routes->add('login', 'Auth::login');
-    $routes->add('register', 'Auth::register');
+    $routes->match(['get', 'post'], 'login', 'Auth::login');
+    $routes->match(['get', 'post'], 'register', 'Auth::register');
 });
 
 /**
