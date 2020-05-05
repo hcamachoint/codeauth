@@ -5,8 +5,12 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table = 'users';
-    protected $allowedFields = ['uuid', 'firstname', 'lastname', 'username', 'email', 'password'];
     protected $primaryKey = 'id';
+    protected $allowedFields = ['uuid', 'firstname', 'lastname', 'username', 'email', 'password'];
+    protected $useSoftDeletes = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     public function login($username, $password)
     {
@@ -14,15 +18,17 @@ class UserModel extends Model
       $query = $this->where("username", $username)->first();
       if ($query) {
         if (password_verify($password, $query['password'])) {
-          $userdata = [
-                  'firstname'  => $query['firstname'],
-                  'lastname' => $query['lastname'],
-                  'username'  => $query['username'],
-                  'email' => $query['email'],
-                  'logged_in' => TRUE
-          ];
-          $session->set($userdata);
-          return true;
+          if ($query['status'] == 9) {
+            $session->setFlashdata('error', 'Your account is banned!');
+            return false;
+          }else{
+            $userdata = [
+                    'username'  => $query['username'],
+                    'logged_in' => TRUE
+            ];
+            $session->set($userdata);
+            return true;
+          }
         }
       }
       $session->setFlashdata('error', 'Wrong username or password!');

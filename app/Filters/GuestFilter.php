@@ -9,7 +9,7 @@ class GuestFilter implements FilterInterface
     public function before(RequestInterface $request)
     {
       $session = \Config\Services::session();
-      if ($session->get('email'))
+      if ($session->get('logged_in'))
       {
           return redirect()->back();
       }

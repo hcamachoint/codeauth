@@ -9,7 +9,7 @@ class AuthFilter implements FilterInterface
     public function before(RequestInterface $request)
     {
       $session = \Config\Services::session();
-      if (!$session->get('email'))
+      if (!$session->get('logged_in'))
       {
           return redirect()->to(base_url().'/auth/login');
       }

@@ -7,6 +7,10 @@
 			</div>
 			<div class="card-body">
 				This is the home page!
+				<?php
+					$session = \Config\Services::session();
+					echo $session->get('username');
+				?>
 			</div>
 		</div>
 	</section>
