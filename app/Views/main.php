@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
-	<section>
+	<div class="container">
 
 		<h1>CodeIgniter4 Auth Template</h1>
 
@@ -16,5 +16,5 @@
 
 		<p>View & Update profile with escaping char support. Password change is included!</p>
 
-	</section>
+	</div>
 <?= $this->endSection() ?>

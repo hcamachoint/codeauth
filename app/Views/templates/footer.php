@@ -1,10 +1,7 @@
 <!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
-<footer class="footer">
-	<div class="environment">
+<footer class="footer mt-auto py-3">
+	<div align="center">
 		<p>Page rendered in {elapsed_time} seconds / Environment: <?= ENVIRONMENT ?></p>
-	</div>
-
-	<div class="copyrights">
 		<p>&copy; <?= date('Y') ?> Project Template.</p>
 	</div>
 </footer>

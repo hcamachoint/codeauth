@@ -1,6 +1,6 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
-	<section>
+	<div class="container">
 		<div class="card">
 			<div class="card-header">
 				<h1>Home page</h1>
@@ -13,5 +13,5 @@
 				?>
 			</div>
 		</div>
-	</section>
+	</div>
 <?= $this->endSection() ?>

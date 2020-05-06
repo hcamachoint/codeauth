@@ -1,23 +1,45 @@
 <!-- HEADER: MENU + HEROE SECTION -->
 <header>
-	<div class="menu">
-		<ul>
-			<li class="logo"><h3>ProjectTemplate</h3></li>
-			<li class="menu-toggle">
-				<button onclick="toggleMenu();">&#9776;</button>
-			</li>
-			<?php
-				$session = \Config\Services::session();
-				if (!empty($session->get('logged_in'))){
-					echo '<li class="menu-item hidden"><a href="/home">Home</a></li>
-								<li class="menu-item hidden"><a href="/user/profile">'.esc($session->get('username')).'</a></li>
-								<li class="menu-item hidden"><a href="/auth/logout">Logout</a></li>';
-				}else{
-					echo '<li class="menu-item hidden"><a href="/">Main</a></li>
-								<li class="menu-item hidden"><a href="/auth/login">Login</a></li>
-								<li class="menu-item hidden"><a href="/auth/register">Register</a></li>';
-				}
-			?>
-		</ul>
-	</div>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<!--<img src="#" width="50" class="rounded-circle bg-white" style="padding: 2px">-->
+		&nbsp;&nbsp;
+		 <a class="navbar-brand" href="/">
+		  <b>CODE</b>AUTH
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border:0">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="container-fluid">
+		  <div class="collapse navbar-collapse" id="navbarCollapse">
+
+			  <ul class="navbar-nav ml-auto">
+					<?php
+						$session = \Config\Services::session();
+						if (!empty($session->get('logged_in'))){
+							echo '
+					  	<li class="nav-item">
+					      <a class="nav-link text-white" href="/home">Home</a>
+					    </li>
+
+					    <li class="nav-item dropdown">
+					        <a class="nav-link text-white dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.esc($session->get('username')).'</a>
+					        <div class="dropdown-menu" aria-labelledby="dropdown01">
+					       	  <a class="dropdown-item" href="/user/profile">Profile</a>
+					          <a class="dropdown-item" href="/user/password">Security</a>
+					          <a class="dropdown-item" href="/auth/logout">Logout</a>
+					        </div>
+					   </li>';
+					}else{
+		 					echo '
+				  	<li class="nav-item">
+				      <a class="nav-link text-white" href="/auth/login">Login</a>
+				    </li>
+				    <li class="nav-item">
+				      <a class="nav-link text-white" href="/auth/register">Register</a>
+				    </li>';}
+					?>
+			  </ul>
+		  </div>
+		</div>
+	</nav>
 </header>
