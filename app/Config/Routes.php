@@ -32,6 +32,13 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ['filter' => 'guest-user']);
 $routes->get('/home', 'Home::home', ['filter' => 'auth-user']);
+
+$routes->group('user', ['filter' => 'auth-user'], function($routes)
+{
+	$routes->get('profile', 'User::profile', ['filter' => 'auth-user']);
+	$routes->match(['get', 'post'], 'password', 'User::password');
+});
+
 $routes->group('auth', ['filter' => 'guest-user'], function($routes)
 {
     $routes->match(['get', 'post'], 'login', 'Auth::login');

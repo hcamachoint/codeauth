@@ -9,7 +9,7 @@
 				This is the home page!
 				<?php
 					$session = \Config\Services::session();
-					echo $session->get('username');
+					echo esc($session->get('username'));
 				?>
 			</div>
 		</div>

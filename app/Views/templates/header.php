@@ -10,7 +10,9 @@
 				$session = \Config\Services::session();
 				if (!empty($session->get('logged_in'))){
 					echo '<li class="menu-item hidden"><a href="/home">Home</a></li>
-								<li class="menu-item hidden"><a href="/auth/logout">Logout</a></li>';
+								<li class="menu-item hidden"><a href="/auth/logout">Logout</a></li>
+								<li class="menu-item hidden"><a href="/user/password">Password</a></li>
+								<li class="menu-item hidden"><a href="/user/profile">'.esc($session->get('username')).'</a></li>';
 				}else{
 					echo '<li class="menu-item hidden"><a href="/">Main</a></li>
 								<li class="menu-item hidden"><a href="/auth/login">Login</a></li>
