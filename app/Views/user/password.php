@@ -19,6 +19,7 @@
 					<div class="form-group">
 							<input type="submit" name="send" value="Send">
 					</div>
+					<p><a href="/user/profile">Back</a></p>
 				</form>
 			</div>
 		</div>

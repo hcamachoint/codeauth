@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    public function  getUser($id)
+    public function getUser($id)
     {
       $query = $this->find($id);
       return $query;
@@ -31,7 +31,7 @@ class UserModel extends Model
 
     }
 
-    public function  profileUpdate($id, $data)
+    public function profileUpdate($id, $data)
     {
       try {
         $this->update($id, ['firstname' => $data['firstname'], 'lastname' => $data['lastname']]);
@@ -47,7 +47,14 @@ class UserModel extends Model
     public function login($username, $password)
     {
       $session = \Config\Services::session();
-      $query = $this->where("username", $username)->first();
+
+      try {
+        $query = $this->where("username", $username)->first();
+      } catch (\Exception $e) {
+        $session->setFlashdata('error', 'Something went wrong: '.$e);
+        return false;
+      }
+
       if ($query) {
         if (password_verify($password, $query['password'])) {
           if ($query['status'] == 9) {
