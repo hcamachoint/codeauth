@@ -4,7 +4,7 @@
 		<!--<img src="#" width="50" class="rounded-circle bg-white" style="padding: 2px">-->
 		&nbsp;&nbsp;
 		 <a class="navbar-brand" href="/">
-		  <b>CODE</b>AUTH
+		  <b><?php echo $_ENV['app.name'] ?></b>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border:0">
 		  <span class="navbar-toggler-icon"></span>

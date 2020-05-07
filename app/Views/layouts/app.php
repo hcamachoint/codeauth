@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 <head>
 	<meta charset="UTF-8">
-	<title>CODEAUTH</title>
+	<title><?php echo $_ENV['app.name'] ?></title>
 	<meta name="description" content="The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>

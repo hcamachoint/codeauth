@@ -20,6 +20,7 @@
 # APP
 #--------------------------------------------------------------------
 
+# app.name = ''
 # app.baseURL = ''
 # app.forceGlobalSecureRequests = false
 
