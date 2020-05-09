@@ -39,8 +39,8 @@
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				      </div>
-				      <form method="post" action="<?= route_to('user-delete') ?>">
-				      		<?= csrf_field() ?>
+				      <form method="post" action="<?= route_to('user-disconnect') ?>">
+				      	<?= csrf_field() ?>
 					      <div class="modal-body">
 					      	Are you sure you want to delete this account? Once removed there will be no turning back.
 					      </div>

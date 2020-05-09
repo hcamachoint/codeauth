@@ -7,18 +7,6 @@
     	</div>
 
     	<div class="card-body">
-          <?php
-            $session = \Config\Services::session();
-            if (!empty($session->getFlashdata('success'))){
-              echo '<label class="text-success">'.$session->getFlashdata('success').'</label>';
-            }
-            if (!empty($session->getFlashdata('warning'))){
-              echo '<label class="text-warning">'.$session->getFlashdata('warning').'</label>';
-            }
-            if (!empty($session->getFlashdata('error'))){
-              echo '<label class="text-error">'.$session->getFlashdata('error').'</label>';
-            }
-          ?>
             <form method="post">
                 <?= csrf_field() ?>
                 <div class="form-group">

@@ -22,3 +22,15 @@ main{
 .navbar{
 	box-shadow: 0 0 10px #D0D0D0;
 }
+
+.text-error{
+	color: #981F05;
+}
+
+.text-success{
+	color: #249805;
+}
+
+.text-warning{
+	color: #FF5733;
+}

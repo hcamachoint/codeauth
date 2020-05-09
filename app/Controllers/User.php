@@ -31,7 +31,7 @@ class User extends BaseController
           'lastname' => $this->request->getVar('lastname'),
         ];
         if ($model->update(session()->id, $data)) {
-          return redirect()->route('user-profile');
+          return redirect()->route('user-profile')->with('success', 'Profile updated!');
         }
       }else {
         return view('user/profileUpdate');
@@ -55,7 +55,7 @@ class User extends BaseController
         return redirect()->route('user-security')->with('success', 'Password changed!');
       }
     }else {
-      return redirect()->route('user-security');
+      return view('user/security');
     }
   }
 
@@ -64,10 +64,10 @@ class User extends BaseController
     $model = new UserModel();
     try {
       $model->delete(session()->id);
-      $session->destroy();
-      return redirect()->route('user-login');
+      session()->destroy();
+      return redirect()->route('user-login')->with('success', 'Account deleted!');
     } catch (\Exception $e) {
-      return redirect()->route('user-profile')->with('error', $e);
+      return redirect()->route('user-security')->with('error', "Problem deleting your account!");
     }
   }
 }
