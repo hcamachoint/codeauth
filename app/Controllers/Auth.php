@@ -11,7 +11,7 @@ class Auth extends BaseController
 		}else {
 			$model = new UserModel();
 			if ($model->login($this->request->getVar('username'), $this->request->getVar('password'))) {
-				return redirect()->to(base_url().'/home');
+				return redirect()->route('page-home');
 			}else {
 				return view('auth/login');
 			}
@@ -20,9 +20,8 @@ class Auth extends BaseController
 
 	public function logout()
 	{
-		$session = \Config\Services::session();
-		$session->destroy();
-		return redirect()->to(base_url().'/auth/login');
+		session()->destroy();
+		return redirect()->route('user-login');
 	}
 
 	public function register()
@@ -44,6 +43,7 @@ class Auth extends BaseController
 	    }
 	    else
 	    {
+					helper('kit');
 	        $model->save([
 	            'firstname' => $this->request->getVar('firstname'),
 	            'lastname'  => $this->request->getVar('lastname'),
@@ -53,19 +53,8 @@ class Auth extends BaseController
 							'uuid' => uuid(),
 							'status' => 1
 	        ]);
-					return redirect()->to(base_url().'/auth/login')->with('success', 'Account created!');
+					return redirect()->route('user-login')->with('success', 'Account created!');
 	    }
 		}
 	}
-}
-
-function uuid()
-{
-		return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-				mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-				mt_rand(0, 0xffff),
-				mt_rand(0, 0x0fff) | 0x4000,
-				mt_rand(0, 0x3fff) | 0x8000,
-				mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-		);
 }

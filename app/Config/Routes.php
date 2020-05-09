@@ -20,7 +20,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /**
  * --------------------------------------------------------------------
@@ -30,19 +30,23 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index', ['filter' => 'guest-user']);
-$routes->get('/home', 'Home::home', ['filter' => 'auth-user']);
+$routes->get('/', 'Home::index', ['as' => 'page-index', 'filter' => 'guest-user']);
+$routes->get('/home', 'Home::home', ['as' => 'page-home', 'filter' => 'auth-user']);
 
 $routes->group('user', ['filter' => 'auth-user'], function($routes)
 {
-	$routes->get('profile', 'User::profile', ['filter' => 'auth-user']);
-	$routes->match(['get', 'post'], 'password', 'User::password');
+	$routes->get('profile', 'User::profile', ['as' => 'user-profile']);
+	$routes->match(['get', 'post'], 'update', 'User::update', ['as' => 'user-update']);
+	$routes->get('security', 'User::security', ['as' => 'user-security']);
+	$routes->post('security/password', 'User::password', ['as' => 'user-password']);
+	$routes->post('security/disconnect', 'User::disconnect', ['as' => 'user-disconnect']);
 });
 
-$routes->group('auth', ['filter' => 'guest-user'], function($routes)
+$routes->group('auth', function($routes)
 {
-    $routes->match(['get', 'post'], 'login', 'Auth::login');
-    $routes->match(['get', 'post'], 'register', 'Auth::register');
+    $routes->match(['get', 'post'], 'login', 'Auth::login', ['as' => 'user-login', 'filter' => 'guest-user']);
+    $routes->match(['get', 'post'], 'register', 'Auth::register', ['as' => 'user-register', 'filter' => 'guest-user']);
+		$routes->get('logout', 'Auth::logout', ['as' => 'user-logout', 'filter' => 'auth-user']);
 });
 
 /**

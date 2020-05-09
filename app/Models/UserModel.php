@@ -12,29 +12,10 @@ class UserModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    public function getUser($id)
-    {
-      $query = $this->find($id);
-      return $query;
-    }
-
     public function  passChange($id, $password)
     {
       try {
         $this->update($id, ['password' => $password]);
-        return true;
-      } catch (\Exception $e) {
-        $session = \Config\Services::session();
-        $session->setFlashdata('error', 'Something went wrong: '.$e);
-        return false;
-      }
-
-    }
-
-    public function profileUpdate($id, $data)
-    {
-      try {
-        $this->update($id, ['firstname' => $data['firstname'], 'lastname' => $data['lastname']]);
         return true;
       } catch (\Exception $e) {
         $session = \Config\Services::session();

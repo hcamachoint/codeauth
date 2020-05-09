@@ -1,3 +1,9 @@
+###REQUIREMENTS
+
+- Define app.name on .env
+- Define app.baseURL on .env
+- Define database on .env
+
 ###SERVE
 
 php spark serve

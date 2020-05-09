@@ -10,7 +10,7 @@
         <p><b>Lastname: </b><?= esc($user['lastname']); ?></p>
         <p><b>Username: </b><?= esc($user['username']); ?></p>
         <p><b>Email: </b><?= esc($user['email']); ?></p>
-				<p><a href="/user/update" class="btn btn-warning">Edit</a></p>
+				<p><a href="<?= route_to('user-update') ?>" class="btn btn-warning">Edit</a></p>
 			</div>
 		</div>
 	</div>
