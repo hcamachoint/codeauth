@@ -30,8 +30,11 @@ class User extends BaseController
           'firstname' => $this->request->getVar('firstname'),
           'lastname' => $this->request->getVar('lastname'),
         ];
-        if ($model->update(session()->id, $data)) {
+        try {
+          $model->update(session()->id, $data);
           return redirect()->route('user-profile')->with('success', 'Profile updated!');
+        } catch (\Exception $e) {
+          return redirect()->route('user-update')->with('error', $e->getMessage());
         }
       }else {
         return view('user/profileUpdate');
@@ -51,8 +54,11 @@ class User extends BaseController
 				'password_confirm' => ['label' => 'Password Confirm', 'rules' => 'required|min_length[6]|max_length[100]|matches[password]']
     ])){
       $model = new UserModel();
-      if ($model->passChange(session()->id, password_hash($this->request->getVar('password'), PASSWORD_BCRYPT))) {
+      try {
+        $model->passChange(session()->id, password_hash($this->request->getVar('password'), PASSWORD_BCRYPT));
         return redirect()->route('user-security')->with('success', 'Password changed!');
+      } catch (\Exception $e) {
+        return redirect()->route('user-security')->with('error', $e->getMessage());
       }
     }else {
       return view('user/security');
@@ -67,7 +73,7 @@ class User extends BaseController
       session()->destroy();
       return redirect()->route('user-login')->with('success', 'Account deleted!');
     } catch (\Exception $e) {
-      return redirect()->route('user-security')->with('error', "Problem deleting your account!");
+      return redirect()->route('user-security')->with('error', $e->getMessage());
     }
   }
 }

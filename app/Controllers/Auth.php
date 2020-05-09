@@ -37,14 +37,12 @@ class Auth extends BaseController
 					'email' => ['label' => 'Email', 'rules' => 'required|valid_email|is_unique[users.email]|min_length[5]|max_length[50]'],
 					'password' => ['label' => 'Password', 'rules' => 'required|min_length[6]|max_length[100]'],
 					'password_confirm' => ['label' => 'Password Confirm', 'rules' => 'required|min_length[6]|max_length[100]|matches[password]']
-	    ]))
-	    {
-					return view('auth/register');
-	    }
-	    else
-	    {
-					helper('kit');
-	        $model->save([
+	    ])){
+				return view('auth/register');
+	    }else{
+				helper('kit');
+				try {
+					$model->save([
 	            'firstname' => $this->request->getVar('firstname'),
 	            'lastname'  => $this->request->getVar('lastname'),
 							'username'  => $this->request->getVar('username'),
@@ -54,6 +52,9 @@ class Auth extends BaseController
 							'status' => 1
 	        ]);
 					return redirect()->route('user-login')->with('success', 'Account created!');
+				} catch (\Exception $e) {
+					return redirect()->route('user-register')->with('error', $e->getMessage());
+				}
 	    }
 		}
 	}
