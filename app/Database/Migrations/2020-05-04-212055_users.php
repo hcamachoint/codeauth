@@ -16,10 +16,12 @@ class Users extends Migration
 						'uuid'       => [
                     'type'           => 'VARCHAR',
                     'constraint'     => '50',
+										'unique'         => true,
             ],
 						'email'       => [
                     'type'           => 'VARCHAR',
                     'constraint'     => '50',
+										'unique'         => true,
             ],
             'firstname'       => [
                     'type'           => 'VARCHAR',
@@ -32,6 +34,7 @@ class Users extends Migration
 						'username'       => [
                     'type'           => 'VARCHAR',
                     'constraint'     => '30',
+										'unique'         => true,
             ],
 						'password'       => [
                     'type'           => 'VARCHAR',
