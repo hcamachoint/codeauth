@@ -10,6 +10,12 @@ class Auth extends BaseController
 			return view('auth/login');
 		}else {
 			$model = new UserModel();
+			if (! $this->validate([
+					'username' => ['label' => 'Username', 'rules' => 'required|alpha_numeric|min_length[3]|max_length[50]'],
+					'password' => ['label' => 'Password', 'rules' => 'required|min_length[6]|max_length[100]'],
+	    ])) {
+				return redirect()->route('user-login');
+			}
 			if ($model->login($this->request->getVar('username'), $this->request->getVar('password'))) {
 				return redirect()->route('page-home');
 			}else {
@@ -33,7 +39,7 @@ class Auth extends BaseController
 	    if (! $this->validate([
 	        'firstname' => ['label' => 'Firstname', 'rules' => 'required|alpha|min_length[3]|max_length[30]'],
 	        'lastname' => ['label' => 'Lastname', 'rules' => 'required|alpha|min_length[3]|max_length[30]'],
-					'username' => ['label' => 'Username', 'rules' => 'required|alpha_numeric|is_unique[users.username]|min_length[3]|max_length[50]|alpha_numeric_space'],
+					'username' => ['label' => 'Username', 'rules' => 'required|alpha_numeric|is_unique[users.username]|min_length[3]|max_length[50]'],
 					'email' => ['label' => 'Email', 'rules' => 'required|valid_email|is_unique[users.email]|min_length[5]|max_length[50]'],
 					'password' => ['label' => 'Password', 'rules' => 'required|min_length[6]|max_length[100]'],
 					'password_confirm' => ['label' => 'Password Confirm', 'rules' => 'required|min_length[6]|max_length[100]|matches[password]']
