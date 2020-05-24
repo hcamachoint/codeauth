@@ -10,7 +10,7 @@ class AuthFilter implements FilterInterface
     {
       if (!session()->logged_in)
       {
-          return redirect()->to(base_url().'/auth/login');
+          return redirect()->to(route_to('user-login'));
       }
     }
 

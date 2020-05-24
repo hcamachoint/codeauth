@@ -27,10 +27,10 @@
 					 </li>
 				 <?php else : ?>
 						<li class="nav-item">
-							<a class="nav-link text-white" href="/auth/login">Login</a>
+							<a class="nav-link text-white" href="<?= route_to('user-login') ?>">Login</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-white" href="/auth/register">Register</a>
+							<a class="nav-link text-white" href="<?= route_to('user-register') ?>">Register</a>
 						</li>
 					<?php endif ?>
 			  </ul>

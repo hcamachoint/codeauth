@@ -54,8 +54,7 @@ class Auth extends BaseController
 							'username'  => $this->request->getVar('username'),
 	            'email'  => $this->request->getVar('email'),
 							'password'  => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
-							'uuid' => uuid(),
-							'status' => 1
+							'uuid' => uuid()
 	        ]);
 					return redirect()->route('user-login')->with('success', 'Account created!');
 				} catch (\Exception $e) {

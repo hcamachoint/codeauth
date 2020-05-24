@@ -15,3 +15,7 @@ php spark serve --php=/usr/bin/php7.6.5.4
 php spark migrate
 php spark migrate:create name_here
 php spark migrate:refresh
+
+###SEEDS
+
+php spark db:seed UserSeeder
